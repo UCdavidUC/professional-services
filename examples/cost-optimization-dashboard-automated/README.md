@@ -3,7 +3,7 @@
 This repo contains SQL scripts for analyzing GCP Billing, Recommendations data and also a guide to setup the Cost Optimization dashboard.
 For sample dashboard [see here](https://datastudio.google.com/c/u/0/reporting/6cf564a4-9c94-4cfd-becd-b9c770ee7aa2/page/r34iB).
 
-## Overview
+## 1. Overview
 
 The Cost Optimization dashboard builds on top of existing [GCP billing dashboard](https://cloud.google.com/billing/docs/how-to/visualize-data) and adds following additional insights to the dashboard.
 
@@ -20,7 +20,7 @@ Few key things to keep in mind before starting.
 
 > <span style="color:red">*NOTE: Implementing this dashboard will incur additional BigQuery charges.*</span>
 
-## Prerequisites
+## 2. Prerequisites
 
 The user running the steps in this guide should have ability to 
 
@@ -38,7 +38,7 @@ Also, Make sure the following resources are accessible.
 
 > <span style="color:red">*NOTE: In case of permission issues with above links, please reach out to gcp-co-dashboard@google.com*</span>
 
-## Setup
+## 3. Setup
 
 The overall process of the setup is as follows, each step is outlined in detail below:
 
@@ -49,7 +49,7 @@ The overall process of the setup is as follows, each step is outlined in detail 
   * Setup dashboard related functions, views and scheduled queries in ```dashboard``` dataset.
 * Use pre-existing templates as a starting point to set up the DataStudio dashboard.
 
-### Project and datasets
+### 3.1. Project and datasets
 
 * Create a project to hold the BigQuery datasets for the dashboard
 * Create the following datasets in the project. Please make sure that all datasets are created in the same region (eg: US). [See instructions](https://cloud.google.com/bigquery/docs/datasets#create-dataset) on how to create a dataset in BigQuery
@@ -57,14 +57,14 @@ The overall process of the setup is as follows, each step is outlined in detail 
   * ```recommender```
   * ```dashboard```
 
-### Billing data exports to Bigquery
+### 3.2. Billing data exports to BigQuery
 
 * In the project created above, enable export for both ‘Daily cost detail’ and ‘Pricing’ data tables to the ```billing``` dataset, by following the instructions [here](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-setup).
 * Data availability
 
   > Your [BigQuery dataset](https://cloud.google.com/bigquery/docs/datasets-intro) only reflects Google Cloud usage and cost data incurred from the date you set up Cloud Billing export, and after. That is, Google Cloud billing data is not added retroactively, so you won't see Cloud Billing data from before you enable export.
 
-### Recommendations data exports to Bigquery
+### 3.3. Recommendations data exports to BigQuery
 
 * Export recommendations data to the ```recommender``` dataset, by following the instructions [here](https://cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq).
 * Data availability
@@ -75,14 +75,14 @@ The overall process of the setup is as follows, each step is outlined in detail 
 
   ![ ](docs/image1.png)
 
-### Cost Optimization data analysis scripts
+### 3.4. Cost Optimization data analysis scripts
 
 This step involves setting up the following data analysis components.
 
 * Required SQL functions
 * Daily scheduled scripts for data analysis and aggregation
 
-#### Common Functions
+#### 3.4.1. Common Functions
 
 * Compose a new query and copy the SQL at [common_functions.sql](scripts/common_functions.sql).
 * Execute the query to create some required functions in the ```dashboard``` dataset.
@@ -90,7 +90,7 @@ This step involves setting up the following data analysis components.
 
   ![ ](docs/image2.png)
 
-#### CO Billing Data Table
+#### 3.4.2. CO Billing Data Table
 
 * Compose a new query and copy the SQL at [co_billing_data.sql](scripts/co_billing_data.sql).
 * Replace ```<BILLING_EXPORT_TABLE>``` with the correct table name created at "Billing data export to Bigquery" step.
@@ -105,7 +105,7 @@ This step involves setting up the following data analysis components.
 
 * Click ‘Schedule’ to create a scheduled query.
 
-#### CO Pricing Data Table
+#### 3.4.3. CO Pricing Data Table
 
 * Compose a new query and copy the SQL at [co_pricing_data.sql](scripts/co_pricing_data.sql).
 * Replace ```<PRICING_EXPORT_TABLE>``` with the correct table name created at "Billing data export to Bigquery" step.
@@ -119,7 +119,7 @@ This step involves setting up the following data analysis components.
 
 * Click ‘Schedule’ to create a scheduled query.
 
-#### CO Recommendations Data Table
+#### 3.4.4. CO Recommendations Data Table
 
 * Compose a new query and copy the SQL at [co_recommendations_data.sql](scripts/co_recommendations_data.sql).
 * Click ‘Schedule query -> Create new scheduled query’.
@@ -132,7 +132,7 @@ This step involves setting up the following data analysis components.
 
 * Click ‘Schedule’ to create a scheduled query.
 
-#### Verify
+#### 3.4.5. Verify
 
 * This is how the BQ scheduled queries screen will look like for CO queries after the above steps.
 
@@ -142,11 +142,11 @@ This step involves setting up the following data analysis components.
 
   ![ ](docs/image8.png)
 
-## Dashboard
+## 4. Dashboard
 
 This step involves copying the template data sources and template dashboard report and making necessary changes.
 
-### Data Sources
+### 4.1. Data Sources
 
 Below are the template data sources that are of interest.
 
@@ -181,7 +181,7 @@ For each of the above data sources:
 
 * Review the confirmation, which should say "No fields changed due to configuration change.", and click "Apply".
 
-### Report
+### 4.2. Report
 
 * Copy the [dashboard template](https://datastudio.google.com/reporting/6cf564a4-9c94-4cfd-becd-b9c770ee7aa2) by clicking the "Make a copy" button at the top right hand side, as shown below.
 
@@ -193,6 +193,6 @@ For each of the above data sources:
 
 * Change the name of the dashboard from “Copy of [EXTERNAL] GCP Cost Optimization Dashboard” to “GCP Cost Optimization Dashboard” or something similar.
 
-## References and support
+## 5. References and support
 
 * For feedback and support reach out to your TAM or gcp-co-dashboard@google.com
