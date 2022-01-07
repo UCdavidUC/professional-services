@@ -92,7 +92,7 @@ This step involves setting up the following data analysis components.
 
 #### 3.4.2. CO Billing Data Table
 
-* Compose a new query and copy the SQL at [co_billing_data.sql](scripts/co_billing_data.sql).
+* Compose a new query and copy the SQL at [co_billing_data.sql](scripts/bq/co_billing_data.sql).
 * Replace ```<BILLING_EXPORT_TABLE>``` with the correct table name created at "Billing data export to Bigquery" step.
 * Run the query and ensure it’s completed without errors
 * Click ‘Schedule query -> Create new scheduled query’.
@@ -107,7 +107,7 @@ This step involves setting up the following data analysis components.
 
 #### 3.4.3. CO Pricing Data Table
 
-* Compose a new query and copy the SQL at [co_pricing_data.sql](scripts/co_pricing_data.sql).
+* Compose a new query and copy the SQL at [co_pricing_data.sql](scripts/bq/co_pricing_data.sql).
 * Replace ```<PRICING_EXPORT_TABLE>``` with the correct table name created at "Billing data export to Bigquery" step.
 * Click ‘Schedule query -> Create new scheduled query’.
 
@@ -121,7 +121,7 @@ This step involves setting up the following data analysis components.
 
 #### 3.4.4. CO Recommendations Data Table
 
-* Compose a new query and copy the SQL at [co_recommendations_data.sql](scripts/co_recommendations_data.sql).
+* Compose a new query and copy the SQL at [co_recommendations_data.sql](scripts/bq/co_recommendations_data.sql).
 * Click ‘Schedule query -> Create new scheduled query’.
 
   ![ ](docs/image3.png)
