@@ -52,7 +52,7 @@ The overall process of the setup is as follows, each step is outlined in detail 
 ### 3.1. Project and datasets
 
 * Create a project to hold the BigQuery datasets for the dashboard
-* Create the following datasets in the project. Please make sure that all datasets are created in the same region (eg: US). [See instructions](https://cloud.google.com/bigquery/docs/datasets#create-dataset) on how to create a dataset in BigQuery
+* Create the following datasets in the project. Please make sure that all datasets are created in the same region and to enable multi-region (eg: US). [See instructions](https://cloud.google.com/bigquery/docs/datasets#create-dataset) on how to create a dataset in BigQuery
   * ```billing```
   * ```recommender```
   * ```dashboard```
